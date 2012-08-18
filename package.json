@@ -1,0 +1,31 @@
+{
+  "name": "show-more-view",
+  "title": "Show More View",
+  "description": "Backbone app to show more tweets",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jpaul/show-more-view",
+  "author": {
+    "name": "John K. Paul",
+    "email": "john@johnkpaul.com",
+    "url": "http://www.johnkpaul.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jpaul/show-more-view.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jpaul/show-more-view/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jpaul/show-more-view/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "~1.5",
+    "ntwitter": "~0.4.1",
+    "connect": "~2.4.3"
+  },
+  "keywords": []
+}
