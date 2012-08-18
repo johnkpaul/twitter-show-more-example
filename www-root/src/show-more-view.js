@@ -6,7 +6,10 @@
  * Licensed under the MIT license.
  */
 
-(function($) {
+(function($, global) {
+    global.TwitterCollection = Backbone.Collection.extend({
+        url:'/search'
+    });
 
 
-}(jQuery));
+}(jQuery, this));

@@ -22,15 +22,13 @@
       raises(block, [expected], [message])
   */
 
-  module('jQuery#awesome', {
+  module('TwitterCollection Tests', {
     setup: function() {
-      this.elems = $('#qunit-fixture').children();
     }
   });
 
-  test('is chainable', 1, function() {
-    // Not a bad test to run on collection methods.
-    strictEqual(this.elems.awesome(), this.elems, 'should be chaninable');
+  test('Twitter Collection exists', 1, function() {
+    ok(window.TwitterCollection);
   });
 
 

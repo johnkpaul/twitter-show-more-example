@@ -59,6 +59,7 @@ module.exports = function(grunt) {
   var http = require('http');
   var url = require('url');
   var config = require('./config');
+  var CORS = require('connect-xcors')
 
   grunt.registerTask('default', 'lint qunit concat min');
   grunt.registerTask('server', 'Start a connect server for twitter API', function() {
@@ -68,6 +69,7 @@ module.exports = function(grunt) {
     var twitter = new require('ntwitter')(config)
     var done = this.async();
     var app = connect()
+      .use(CORS({}))
       .use(connect.logger('dev'))
       .use(function(req, res){
         var url_parts = url.parse(req.url, true);
@@ -79,6 +81,7 @@ module.exports = function(grunt) {
         });
       });
      http.createServer(app).listen(3000).on('close', done);
+     connect(connect.static('www-root')).listen(1234);
   });
 
 
