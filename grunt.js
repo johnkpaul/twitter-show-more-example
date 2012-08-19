@@ -86,7 +86,12 @@ module.exports = function(grunt) {
         var since_id = query['last_fetched_id'];
         if(since_id){ data_to_send['since_id'] = since_id; }
         twitter.search('NYC OR #nyc OR new york city', data_to_send, function(err, data) {
-          res.end(JSON.stringify(data.results));
+          try{
+            res.end(JSON.stringify(data.results));
+          }
+          catch(e){
+            res.end(JSON.stringify([]));
+          }
         });
       });
      http.createServer(app).listen(3000).on('close', done);
