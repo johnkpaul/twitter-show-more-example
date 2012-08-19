@@ -1,7 +1,9 @@
-<span class="js-test-tweet-id-{{id}}"></span>
-{{id}}
-<img src="{{profile_image_url}}">
-{{text}}
-{{#with metadata}}
-    {{result_type}}
-{{/with}}
+<div class="tweet">
+    <span class="js-test-tweet-id-{{id}}"></span>
+    {{created_at}}<br>
+    <img src="{{profile_image_url}}"><br>
+    {{text}}<br>
+    {{#with metadata}}
+        {{result_type}}
+    {{/with}}
+</div>
