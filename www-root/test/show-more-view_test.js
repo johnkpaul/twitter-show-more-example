@@ -107,10 +107,8 @@
             {"Content-Type": "application/json"},
             JSON.stringify([{id:3}, {id:4}]));
 
-    ok(this.view.$('.js-test-tweet-id-3').parent().
-                            hasClass('js-hidden'), "third item is hidden");
-    ok(this.view.$('.js-test-tweet-id-4').parent().
-                            hasClass('js-hidden'), "fourth item is hidden");
+    ok(this.view.subviews[3].$el.hasClass('js-hidden'), "third item is hidden");
+    ok(this.view.subviews[4].$el.hasClass('js-hidden'), "fourth item is hidden");
   });
 
   test('TwitterView shows "show more" button when new items are available to display', 2, function() {
