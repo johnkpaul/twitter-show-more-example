@@ -11,7 +11,7 @@
 
     global.TwitterView = Backbone.View.extend({
         events:{
-            'click .js-show-more-button':'showMoreButtonHandle'
+            'click .js-show-more-button':'showMoreButtonHandler'
         },
         initialize:function(options){
             _.bindAll(this, 'createTweetViews',
