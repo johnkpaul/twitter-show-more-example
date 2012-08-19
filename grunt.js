@@ -61,6 +61,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-handlebars');
+  grunt.loadNpmTasks( "grunt-junit" );
 
   var connect = require('connect');
   var http = require('http');
