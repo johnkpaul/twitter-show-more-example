@@ -10,6 +10,9 @@
 (function($, global) {
 
     global.TwitterView = Backbone.View.extend({
+        events:{
+            'click .js-show-more-button':'showMoreButtonHandler'
+        },
         initialize:function(options){
             _.bindAll(this, 'createTweetViews',
                             'addTweetViewFromModel',
@@ -29,9 +32,18 @@
             this.trigger('rendered');
             return this.$el.html(template);
         },
+        showMoreButtonHandler:function(model){
+            this.$('.js-hidden').removeClass('js-hidden');
+            this.$('.js-show-more-button').addClass('js-hidden');
+        },
         addTweetViewFromModel:function(model){
                 var view = new global.TweetView({model:model});
-                view.render().prependTo(this.$('.js-tweets'));
+                var $viewEl = view.render();
+                if(model.get('id') > this.collection.last_fetched_id){
+                    $viewEl.addClass('js-hidden');
+                    this.$('.js-show-more-button').removeClass('js-hidden');
+                }
+                $viewEl.prependTo(this.$('.js-tweets'));
         },
         createTweetViews:function(){
             this.collection.each(this.addTweetViewFromModel);

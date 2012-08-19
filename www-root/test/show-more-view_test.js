@@ -91,7 +91,67 @@
     ok(this.view.$('.js-test-tweet-id-4').length);
     subViewSpy.restore(); 
   });
+  
+  test('TwitterView adds newly added tweets to list, but hides them', 2, function() {
+    this.view.render();
+    this.server.requests[0].respond(
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify([{id:1}, {id:2}]));
 
+    this.collection.fetch({add:true});
+    this.collection.last_fetched_id = 2;
+
+    this.server.requests[1].respond(
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify([{id:3}, {id:4}]));
+
+    ok(this.view.$('.js-test-tweet-id-3').parent().
+                            hasClass('js-hidden'), "third item is hidden");
+    ok(this.view.$('.js-test-tweet-id-4').parent().
+                            hasClass('js-hidden'), "fourth item is hidden");
+  });
+
+  test('TwitterView shows "show more" button when new items are available to display', 2, function() {
+    this.view.render();
+    this.server.requests[0].respond(
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify([{id:1}, {id:2}]));
+
+    this.collection.fetch({add:true});
+    this.collection.last_fetched_id = 2;
+
+    ok(this.view.$('.js-show-more-button').hasClass('js-hidden'), "show more button is displayed");
+    this.server.requests[1].respond(
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify([{id:3}, {id:4}]));
+
+    ok(!this.view.$('.js-show-more-button').hasClass('js-hidden'), "show more button is displayed");
+  });
+  test('TwitterView "show more" button shows more tweets when clicked', 2, function() {
+    this.view.render();
+    this.server.requests[0].respond(
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify([{id:1}, {id:2}]));
+
+    this.collection.fetch({add:true});
+    this.collection.last_fetched_id = 2;
+
+    this.server.requests[1].respond(
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify([{id:3}, {id:4}]));
+
+    this.view.$('.js-show-more-button').trigger('click');
+    ok(!this.view.$('.js-test-tweet-id-3').parent().
+                            hasClass('js-hidden'), "third item is not hidden");
+    ok(!this.view.$('.js-test-tweet-id-4').parent().
+                            hasClass('js-hidden'), "fourth item is not hidden");
+  });
   module('TwitterCollection Tests', {
     setup: function() {
         this.server = sinon.fakeServer.create();
