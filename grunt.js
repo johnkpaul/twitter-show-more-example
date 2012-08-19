@@ -82,10 +82,10 @@ module.exports = function(grunt) {
       .use(function(req, res){
         var url_parts = url.parse(req.url, true);
         var query = url_parts.query;
-        var data = {};
+        var data_to_send = {};
         var since_id = query['last_fetched_id'];
-        if(since_id){ data['since_id'] = since_id; }
-        twitter.search('NYC OR #nyc OR new york city', data, function(err, data) {
+        if(since_id){ data_to_send['since_id'] = since_id; }
+        twitter.search('NYC OR #nyc OR new york city', data_to_send, function(err, data) {
           res.end(JSON.stringify(data.results));
         });
       });
