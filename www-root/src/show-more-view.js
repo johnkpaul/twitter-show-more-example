@@ -74,14 +74,17 @@
             var id = tweet.get('id').toString();
             return id;
         },
-        fetch:function(){
-            var args = Array.prototype.slice.call(arguments);
+        getArgs:function(args){
             if (typeof args[0] !== "object"){
                 args[0] = {};
             }
             if (typeof args[0].data !== "object"){
                 args[0].data = {};
             }
+            return args; 
+        },
+        fetch:function(){
+            var args = this.getArgs(Array.prototype.slice.call(arguments));
             if ("last_fetched_id" in this){
                 args[0].data.last_fetched_id = this.last_fetched_id;
             }
