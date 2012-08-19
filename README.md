@@ -5,11 +5,21 @@ Backbone app to show more tweets
 ## Getting Started
 clone this repository
 
-```npm install -g grunt```
-```npm install```
-```grunt server```
+rename config.sample.js to config.js
 
-go to localhost:1234
+populate config.js with your twitter API credentials
+
+```npm install -g grunt```
+
+```npm install```
+
+```grunt server```
+ 
+*Live App
+http://localhost:1234
+
+*Unit tests
+http://localhost:1234/tests/show-more-view.html
 
 ## License
 Copyright (c) 2012 John K. Paul  
