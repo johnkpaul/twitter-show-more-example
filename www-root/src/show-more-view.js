@@ -8,10 +8,45 @@
  */
 
 (function($, global) {
+
+    global.TwitterView = Backbone.View.extend({
+        initialize:function(options){
+        },
+        render:function(){
+            _.bindAll(this, 'createTweetViews', 'addTweetViewFromModel');
+            this.collection.fetch().then(this.createTweetViews);
+            var template = window.Handlebars.templates.twitter_view();
+            return this.$el.html(template);
+        },
+        addTweetViewFromModel:function(model){
+                var view = new global.TweetView({model:model});
+                view.render().appendTo(this.$('.js-tweets'));
+        },
+        createTweetViews:function(){
+            this.collection.each(this.addTweetViewFromModel);
+            
+        }
+    });
+
+    global.TweetView = Backbone.View.extend({
+        render:function(){
+            var data = this.model.toJSON();
+            var template = window.Handlebars.templates.tweet_view(data);
+            return this.$el.html(template);
+        }
+    });
+
+    global.TwitterModel = Backbone.Model.extend({
+        defaults:{}
+    });
+
     global.TwitterCollection = Backbone.Collection.extend({
-        url:'/search',
+        url:'http://localhost:3000/',
+        model:global.TwitterModel,
         comparator:function(tweet){
-            return tweet.get('id').toString();
+            var id = tweet.get('id').toString();
+            var reversed = Array.prototype.slice.call(id).reverse().join("");
+            return reversed;
         },
         fetch:function(){
             var args = Array.prototype.slice.call(arguments);

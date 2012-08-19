@@ -26,7 +26,8 @@
     "jquery": "~1.5",
     "ntwitter": "~0.4.1",
     "connect": "~2.4.3",
-    "connect-xcors": "~0.5.2"
+    "connect-xcors": "~0.5.2",
+    "grunt-handlebars": "0.0.6"
   },
   "keywords": []
 }

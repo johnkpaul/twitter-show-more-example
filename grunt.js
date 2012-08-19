@@ -27,11 +27,11 @@ module.exports = function(grunt) {
       files: ['test/**/*.html']
     },
     lint: {
-      files: ['grunt.js', './www-root/src/*', 'test/*.js']
+      files: ['grunt.js', './www-root/src/show-more-view.js', 'test/*.js']
     },
     watch: {
-      files: '<config:lint.files>',
-      tasks: 'lint qunit'
+      files: ['./**/*.js', './**/*.handlebars'],
+      tasks: 'lint handlebars qunit'
     },
     jshint: {
       options: {
@@ -51,10 +51,17 @@ module.exports = function(grunt) {
         jQuery: true
       }
     },
-    uglify: {}
+    uglify: {},
+    handlebars: {
+        all: {
+          src: 'www-root/src',
+          dest: 'www-root/src/templates.js'
+        }
+      }
   });
 
-  // Default task.
+  grunt.loadNpmTasks('grunt-handlebars');
+
   var connect = require('connect');
   var http = require('http');
   var url = require('url');
@@ -75,9 +82,10 @@ module.exports = function(grunt) {
       .use(function(req, res){
         var url_parts = url.parse(req.url, true);
         var query = url_parts.query;
+        var data = {};
         var since_id = query['last_fetched_id'];
-        if(!since_id){ since_id = 236905249166741500; }
-        twitter.search('NYC OR #nyc OR new york city', {since_id:since_id}, function(err, data) {
+        if(since_id){ data['since_id'] = since_id; }
+        twitter.search('NYC OR #nyc OR new york city', data, function(err, data) {
           res.end(JSON.stringify(data.results));
         });
       });
