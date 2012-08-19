@@ -26,13 +26,15 @@
   module('TwitterView Tests', {
     setup: function() {
         this.server = sinon.fakeServer.create();
-        this.collection = new Backbone.Collection();
+        this.clock = sinon.useFakeTimers();
+        this.collection = new Backbone.Collection([], {model:window.TweetModel});
         this.collection.url = '\\';
         this.view = new window.TwitterView({el:$("#qunit-fixture"),
                                             collection:this.collection});
     },
     teardown: function() {
         this.server.restore();
+        this.clock.restore();
     }
   });
 
@@ -54,6 +56,40 @@
     ok(subViewSpy.calledTwice);
     ok(this.view.$('.js-test-tweet-id-1').length);
     ok(this.view.$('.js-test-tweet-id-2').length);
+    subViewSpy.restore();
+  });
+
+  test('TwitterView fetches collection every 10 seconds to get new results', 3, function() {
+    var stub = sinon.stub(this.collection, "fetch");
+    stub.returns($.Deferred().resolve(true));
+    this.view.render();
+    ok(stub.calledOnce); 
+    this.clock.tick(10000);
+    ok(stub.calledTwice); 
+    this.clock.tick(10000);
+    ok(stub.calledThrice); 
+  });
+
+  test('TwitterView adds new tweet view when new items are provided', 4, function() {
+    this.view.render();
+    this.server.requests[0].respond(
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify([{id:1}, {id:2}]));
+    this.collection.fetch({add:true});
+
+    var subViewSpy = sinon.spy(window,"TweetView");
+
+    this.server.requests[1].respond(
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify([{id:3}, {id:4}]));
+
+    ok(subViewSpy.calledWithNew());
+    ok(subViewSpy.calledTwice);
+    ok(this.view.$('.js-test-tweet-id-3').length);
+    ok(this.view.$('.js-test-tweet-id-4').length);
+    subViewSpy.restore(); 
   });
 
   module('TwitterCollection Tests', {
@@ -83,9 +119,9 @@
     this.server.requests[0].respond(
             200,
             {"Content-Type": "application/json"},
-            JSON.stringify([{id:1}, {id:3}, {id:2}]));
+            JSON.stringify([{id:"237173666385899520"}, {id:"237173604251484160"}]));
 
-    equal(this.collection.last_fetched_id, 3, "collection still stores 3, even though 2 is last");
+    equal(this.collection.last_fetched_id, "237173666385899520", "collection still stores latest number, even when strings");
   });
 
   test('last_fetched_id is sent back as since_id to twitter api', 1, function() {
