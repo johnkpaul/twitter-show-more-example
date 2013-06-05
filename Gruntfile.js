@@ -1,39 +1,16 @@
 /*global module:false, require:false*/
 module.exports = function(grunt) {
 
-  // Project configuration.
   grunt.initConfig({
-    pkg: '<json:package.json>',
-    meta: {
-      banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
-    },
-    concat: {
-      dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/<%= pkg.name %>.js>'],
-        dest: 'dist/<%= pkg.name %>.js'
-      }
-    },
-    min: {
-      dist: {
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'dist/<%= pkg.name %>.min.js'
-      }
-    },
     qunit: {
       files: ['www-root/test/**/*.html']
-    },
-    lint: {
-      files: ['grunt.js', './www-root/src/show-more-view.js', 'www-root/test/*.js']
     },
     watch: {
       files: ['./**/*.js', './**/*.handlebars'],
       tasks: 'lint handlebars qunit'
     },
     jshint: {
+      files: ['grunt.js', './www-root/src/show-more-view.js', 'www-root/test/*.js'],
       options: {
         curly: true,
         eqeqeq: true,
@@ -45,10 +22,11 @@ module.exports = function(grunt) {
         undef: true,
         boss: true,
         eqnull: true,
-        browser: true
-      },
-      globals: {
-        jQuery: true
+        browser: true,
+        globals: {
+          'ok': false,
+          'jQuery': false
+        }
       }
     },
     uglify: {},
@@ -60,8 +38,9 @@ module.exports = function(grunt) {
       }
   });
 
-  grunt.loadNpmTasks('grunt-handlebars');
-  grunt.loadNpmTasks( "grunt-junit" );
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
 
   var connect = require('connect');
   var http = require('http');
@@ -70,7 +49,7 @@ module.exports = function(grunt) {
   var config = require('./config');
   var CORS = require('connect-xcors');
 
-  grunt.registerTask('default', 'lint qunit concat min');
+  grunt.registerTask('default', ['jshint', 'qunit']);
   grunt.registerTask('server', 'Start a connect server for twitter API', function() {
     grunt.log.writeln('starting connect server on port 3000');
 
