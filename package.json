@@ -9,6 +9,9 @@
     "email": "john@johnkpaul.com",
     "url": "http://www.johnkpaul.com"
   },
+  "scripts": {
+      "test": "grunt --verbose"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/jpaul/show-more-view.git"
