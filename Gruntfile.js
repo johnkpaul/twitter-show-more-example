@@ -42,15 +42,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
 
-  var connect = require('connect');
-  var http = require('http');
-  var url = require('url');
-  var Ntwitter = require('ntwitter');
-  var config = require('./config');
-  var CORS = require('connect-xcors');
 
   grunt.registerTask('default', ['jshint', 'qunit']);
   grunt.registerTask('server', 'Start a connect server for twitter API', function() {
+    var connect = require('connect');
+    var http = require('http');
+    var url = require('url');
+    var Ntwitter = require('ntwitter');
+    var config = require('./config');
+    var CORS = require('connect-xcors');
+
     grunt.log.writeln('starting connect server on port 3000');
 
 
