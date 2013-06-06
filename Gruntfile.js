@@ -41,6 +41,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-qunit-junit');
 
 
   grunt.registerTask('default', ['jshint', 'qunit']);
@@ -66,7 +67,7 @@ module.exports = function(grunt) {
         var data_to_send = {};
         var since_id = query['last_fetched_id'];
         if(since_id){ data_to_send['since_id'] = since_id; }
-        twitter.search('NYC OR #nyc OR new york city', data_to_send, function(err, data) {
+        twitter.search('Penn State OR #pennstate OR psu', data_to_send, function(err, data) {
           try{
             res.end(JSON.stringify(data.results));
           }

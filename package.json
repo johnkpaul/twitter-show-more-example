@@ -10,7 +10,7 @@
     "url": "http://www.johnkpaul.com"
   },
   "scripts": {
-      "test": "grunt --verbose"
+    "test": "grunt --verbose"
   },
   "repository": {
     "type": "git",
@@ -30,14 +30,14 @@
     "ntwitter": "~0.4.1",
     "connect": "~2.4.3",
     "connect-xcors": "~0.5.2",
-    "grunt-handlebars": "0.0.6",
-    "grunt-junit": "~0.1.4"
+    "grunt-handlebars": "0.0.6"
   },
   "keywords": [],
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-handlebars": "~0.5.9",
     "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-qunit": "~0.2.1"
+    "grunt-contrib-qunit": "~0.2.1",
+    "grunt-qunit-junit": "0.1.0-alpha2"
   }
 }
