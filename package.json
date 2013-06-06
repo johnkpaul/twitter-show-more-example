@@ -38,6 +38,7 @@
     "grunt-contrib-handlebars": "~0.5.9",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-qunit": "~0.2.1",
-    "grunt-qunit-junit": "0.1.0-alpha2"
+    "grunt-qunit-junit": "0.1.0-alpha2",
+    "grunt-contrib-watch": "~0.4.4"
   }
 }

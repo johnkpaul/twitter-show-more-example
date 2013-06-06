@@ -6,8 +6,8 @@ module.exports = function(grunt) {
       files: ['www-root/test/**/*.html']
     },
     watch: {
-      files: ['./**/*.js', './**/*.handlebars'],
-      tasks: 'lint handlebars qunit'
+      files: ['./www-root/**/*.js', './www-root/**/*.handlebars'],
+      tasks: ['jshint', 'handlebars', 'qunit']
     },
     jshint: {
       files: ['grunt.js', './www-root/src/show-more-view.js', 'www-root/test/*.js'],
@@ -48,6 +48,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-qunit-junit');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   grunt.registerTask('default', ['jshint', 'qunit']);
