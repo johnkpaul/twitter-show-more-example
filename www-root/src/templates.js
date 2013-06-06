@@ -1,1 +1,50 @@
-(function(){var a=Handlebars.template,b=Handlebars.templates=Handlebars.templates||{};b.tweet_view=a(function(a,b,c,d,e){function p(a,b){var d="",e;return d+="\n        ",i=c.result_type,e=i||a.result_type,typeof e===l?e=e.call(a,{hash:{}}):e===n&&(e=m.call(a,"result_type",{hash:{}})),d+=o(e)+"\n    ",d}c=c||a.helpers;var f="",g,h,i,j,k=this,l="function",m=c.helperMissing,n=void 0,o=this.escapeExpression;f+='<div class="tweet">\n    <span class="js-test-tweet-id-',i=c.id,g=i||b.id,typeof g===l?g=g.call(b,{hash:{}}):g===n&&(g=m.call(b,"id",{hash:{}})),f+=o(g)+'"></span>\n    ',i=c.created_at,g=i||b.created_at,typeof g===l?g=g.call(b,{hash:{}}):g===n&&(g=m.call(b,"created_at",{hash:{}})),f+=o(g)+'<br>\n    <img src="',i=c.profile_image_url,g=i||b.profile_image_url,typeof g===l?g=g.call(b,{hash:{}}):g===n&&(g=m.call(b,"profile_image_url",{hash:{}})),f+=o(g)+'"><br>\n    ',i=c.text,g=i||b.text,typeof g===l?g=g.call(b,{hash:{}}):g===n&&(g=m.call(b,"text",{hash:{}})),f+=o(g)+"<br>\n    ",i=c.metadata,g=i||b.metadata,h=c["with"],j=k.program(1,p,e),j.hash={},j.fn=j,j.inverse=k.noop,g=h.call(b,g,j);if(g||g===0)f+=g;return f+="\n</div>\n",f}),b.twitter_view=a(function(a,b,c,d,e){c=c||a.helpers;var f,g=this;return'<div class="container">\n    <div class="js-show-more-button js-hidden show-more">Show More</div>\n    <div class="js-tweets"></div>\n</div>\n'})})()
+this["Handlebars"] = this["Handlebars"] || {};
+this["Handlebars"]["templates"] = this["Handlebars"]["templates"] || {};
+
+this["Handlebars"]["templates"]["tweet_view"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n        ";
+  if (stack1 = helpers.result_type) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.result_type; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n    ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"tweet\">\n    <span class=\"js-test-tweet-id-";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"></span>\n    ";
+  if (stack1 = helpers.created_at) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.created_at; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "<br>\n    <img src=\"";
+  if (stack1 = helpers.profile_image_url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.profile_image_url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"><br>\n    ";
+  if (stack1 = helpers.text) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.text; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "<br>\n    ";
+  stack1 = helpers['with'].call(depth0, depth0.metadata, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</div>\n";
+  return buffer;
+  });
+
+this["Handlebars"]["templates"]["twitter_view"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"container\">\n    <div class=\"js-show-more-button js-hidden show-more\">Show More</div>\n    <div class=\"js-tweets\"></div>\n</div>\n";
+  });

@@ -32,8 +32,14 @@ module.exports = function(grunt) {
     uglify: {},
     handlebars: {
         all: {
-          src: 'www-root/src',
+          src: 'www-root/src/**/*.handlebars',
           dest: 'www-root/src/templates.js'
+        },
+        options: {
+          namespace: 'Handlebars.templates',
+          processName: function(filename) {
+            return filename.slice(filename.lastIndexOf('/')+1, filename.lastIndexOf('.'));
+          }
         }
       }
   });
