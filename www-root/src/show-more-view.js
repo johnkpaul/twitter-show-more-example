@@ -21,7 +21,7 @@
         },
         onRender:function(){
             var collection = this.collection;
-            this.collection.bind('add', this.addTweetViewFromModel);
+            //this.collection.bind('add', this.addTweetViewFromModel);
             this.interval = global.setInterval(function(){
                 collection.fetch(); 
             }, 10000);
