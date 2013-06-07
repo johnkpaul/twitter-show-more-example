@@ -39,7 +39,7 @@
         addTweetViewFromModel:function(model){
                 var view = new global.TweetView({model:model});
                 this.subviews = this.subviews ? this.subviews : {};
-                this.subviews[model.get('id')] = view;
+                //this.subviews[model.get('id')] = view;
 
                 var $viewEl = view.render();
                 if(model.get('id') > this.collection.last_fetched_id){
