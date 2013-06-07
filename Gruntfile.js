@@ -74,7 +74,7 @@ module.exports = function(grunt) {
         var data_to_send = {};
         var since_id = query['last_fetched_id'];
         if(since_id){ data_to_send['since_id'] = since_id; }
-        twitter.search('Penn State OR #pennstate OR psu', data_to_send, function(err, data) {
+        twitter.search('#javascript OR #html5 OR javascript OR html5', data_to_send, function(err, data) {
           try{
             res.end(JSON.stringify(data.results));
           }
