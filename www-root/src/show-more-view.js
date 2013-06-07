@@ -84,7 +84,7 @@
             return args; 
         },
         fetch:function(){
-            var args = this.getArgs(Array.prototype.slice.call(arguments));
+            var args = this.getArgs(arguments);
             if ("last_fetched_id" in this){
                 args[0].data.last_fetched_id = this.last_fetched_id;
             }
