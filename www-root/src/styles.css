@@ -1,4 +1,15 @@
-.container{width:400px;margin:auto;}
-.js-hidden{display:none;}
-.show-more{cursor:pointer;border:1px solid black;}
-.tweet{border:1px solid black;padding:10px;}
+.container {
+  width: 400px;
+  margin: auto;
+}
+.js-hidden {
+  display: none;
+}
+.show-more {
+  cursor: pointer;
+  border: 1px solid black;
+}
+.tweet {
+  border: 1px solid black;
+  padding: 10px;
+}
